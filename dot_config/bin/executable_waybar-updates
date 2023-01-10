@@ -1,0 +1,42 @@
+#!/bin/sh
+
+cache_path="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-updates"
+
+case "$1" in
+    show)
+        if [ -f "$cache_path" ]; then
+            cat "$cache_path"
+        else
+            printf '{"text": "waybar-updates cache is missing"}\n'
+        fi
+        ;;
+    refresh)
+        pac="$(checkupdates)"
+        aur="$(yay -Qu)"
+
+        pac_n=$(printf "$pac" | grep -c '^')
+        aur_n=$(printf "$aur" | grep -c '^')
+
+        text=""
+        tooltip=""
+
+        [ -n "$text" -o -n "$aur" ] && text="/${aur_n}${text}"
+        [ -n "$aur" ]               && tooltip="AUR:\n\n$aur\n\n${tooltip}"
+        [ -n "$text" -o -n "$pac" ] && text="${pac_n}${text}"
+        [ -n "$pac" ]               && tooltip="pacman:\n\n$pac\n\n${tooltip}"
+
+        tooltip="$(printf "$tooltip" | perl -pe 's/\n/\\n/g' | perl -pe 's/(?:\\n)+$//')"
+
+        if [ -z "$text" ]; then
+            printf '{"text": ""}\n' > "$cache_path"
+        else
+            printf "{\"text\": \"<span foreground='#928374'></span> %s\", \"tooltip\": \"%s\" }\n" "$text" "$tooltip" > "$cache_path"
+        fi
+
+        pkill -RTMIN+1 -x waybar
+        ;;
+    *)
+        echo >&2 "Usage: $0 <show|refresh>"
+        exit 1
+        ;;
+esac

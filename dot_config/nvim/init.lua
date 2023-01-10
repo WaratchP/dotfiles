@@ -1,0 +1,31 @@
+-- Base
+require "user.keymaps"
+require "user.options"
+
+-- Packer
+require "user.plugins"
+
+-- Plugins
+require "user.autocommands"
+require "user.telescope"
+require "user.cmp"
+require "user.lsp"
+require "user.illuminate"
+require "user.dap"
+require "user.treesitter"
+require "user.gitsigns"
+require "user.alpha"
+require "user.nvim-tree"
+require "user.bufferline"
+require "user.lualine"
+require "user.nvim-tmux"
+require "user.vimwiki"
+require "user.instantmd"
+require "user.autopairs"
+require "user.comment"
+require "user.toggleterm"
+require "user.project"
+require "user.impatient"
+require "user.indentline"
+require "user.colorscheme"
+require "user.bicep-detect"

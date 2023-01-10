@@ -1,0 +1,17 @@
+#!/bin/sh
+
+error() {
+    echo >&2 "$*"
+    exit 1
+}
+
+[ $# -gt 0 ] || error "Usage: $0 <action> (e.g. $0 output-mute)"
+
+case "$1" in
+    bt-connect-headphones) bluetoothctl connect 20:74:CF:79:54:24 ;;
+    bt-connect-speakers)   bluetoothctl connect 00:1D:DF:7F:05:43 ;;
+    bt-connect-mouse)      bluetoothctl connect 34:88:5D:DF:4D:21 ;;
+    bt-connect-keyboard)   bluetoothctl connect 18:45:16:B6:19:E6 ;;
+    bt-disconnect)         bluetoothctl disconnect ;;
+    *)                     error "Unknown action '$1'" ;;
+esac

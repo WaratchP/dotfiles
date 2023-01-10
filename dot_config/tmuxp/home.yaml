@@ -1,0 +1,17 @@
+session_name: Home
+windows:
+- focus: 'true'
+  layout: b837,239x63,0,0{117x63,0,0[117x24,0,0{54x24,0,0[54x11,0,0,1,54x12,0,12,2],62x24,55,0,3},117x38,0,25,4],121x63,118,0[121x17,118,0,5,121x20,118,18,6,121x24,118,39,7]}
+  options:
+    automatic-rename: 'off'
+  panes:
+  - tty-clock -cn -C3
+  - neofetch
+  - pulsemixer
+  - btm
+  - ncmpcpp-ueberzug
+  - focus: 'true'
+    shell_command: ncmpcpp --screen='media_library' --config='~/.config/ncmpcpp/menu'
+  - ncmpcpp --screen='visualizer' --config='~/.config/ncmpcpp/visualizer'
+  start_directory: /home/waratch
+  window_name: Control

@@ -1,0 +1,38 @@
+#!/bin/sh
+
+swaylock \
+	--screenshots \
+	--clock \
+  --hide-keyboard-layout \
+	--indicator \
+  --font "MesloLGS NF" \
+  --font-size 45 \
+	--indicator-radius 150 \
+	--indicator-thickness 10 \
+	--effect-blur 8x5 \
+  --effect-scale 1.1 --scaling center \
+	--effect-vignette 0.5:0.5 \
+	--ring-color ebdbb2 \
+	--key-hl-color 665c54 \
+  --bs-hl-color 282828 \
+  --layout-bg-color 00000000 \
+	--separator-color 00000000 \
+  --ring-ver-color 45858888 \
+  --ring-wrong-color cc241d88 \
+  --ring-clear-color 689d6a88 \
+  --text-color fbf1c7 \
+  --text-caps-lock-color d79921 \
+  --text-ver-color fbf1c7 \
+  --text-wrong-color fbf1c7 \
+  --text-clear-color fbf1c7 \
+	--line-color 00000000 \
+  --line-ver-color 00000000 \
+  --line-wrong-color 00000000 \
+  --line-clear-color 00000000 \
+	--inside-color 50494588 \
+  --inside-ver-color 07667888 \
+  --inside-wrong-color 9d000688 \
+  --inside-clear-color 427b5888 \
+	--grace 2 \
+	--fade-in 0.2
+

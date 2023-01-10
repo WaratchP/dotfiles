@@ -1,0 +1,100 @@
+# [Created by task 2.6.2 10/3/2022 11:27:37]
+# Taskwarrior program configuration file.
+# For more documentation, see https://taskwarrior.org or try 'man task', 'man task-color',
+# 'man task-sync' or 'man taskrc'
+
+# Here is an example of entries that use the default, override and blank values
+#   variable=foo   -- By specifying a value, this overrides the default
+#   variable=      -- By specifying no value, this means no default
+#   #variable=foo  -- By commenting out the line, or deleting it, this uses the default
+
+# You can also refence environment variables:
+#   variable=$HOME/task
+#   variable=$VALUE
+
+# Use the command 'task show' to see all defaults and overrides
+
+# Files
+#data.location=/home/fg94x/.task
+
+# To use the default location of the XDG directories,
+# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and uncomment below
+
+data.location=~/.local/share/task
+hooks.location=~/.config/task/hooks
+
+# Color theme (uncomment one to use)
+#include light-16.theme
+#include light-256.theme
+#include dark-16.theme
+#include dark-256.theme
+#include dark-red-256.theme
+#include dark-green-256.theme
+#include dark-blue-256.theme
+#include dark-violets-256.theme
+#include dark-yellow-green.theme
+#include dark-gray-256.theme
+#include dark-gray-blue-256.theme
+#include solarized-dark-256.theme
+#include solarized-light-256.theme
+#include no-color.theme
+
+## GTD Framework ##
+
+# UDAs
+uda.gtdList.type=string
+uda.gtdList.label=GtdList
+uda.gtdList.values=in,next,objective,someday,standby,cal
+
+uda.priority.values=H,L
+urgency.uda.priority.H.coefficient=6.0
+urgency.uda.priority.L.coefficient=-6.0
+
+uda.difficulty.type=string
+uda.difficulty.label=Difficulty
+uda.difficulty.values=H,L,
+
+# Reports
+report.next.columns=id,start.age,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description.count,urgency
+report.next.labels=ID,Active,P,Project,Tag,Recur,S,Due,Until,Description,Urg
+report.next.sort=urgency-
+
+report.all.columns=id,status.short,uuid.short,start.active,entry.age,end.age,gtdList,depends.indicator,priority,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
+report.all.labels=ID,St,UUID,A,Age,Done,Type,D,P,Project,Tags,R,Wait,Sch,Due,Until,Description
+
+report.all_valid.columns=id,status.short,uuid.short,start.active,entry.age,end.age,gtdList,depends.indicator,priority,project,tags.count,recur.indicator,wait.remaining,scheduled.remaining,due,until.remaining,description
+report.all_valid.labels=ID,St,UUID,A,Age,Done,Type,D,P,Project,Tags,R,Wait,Sch,Due,Until,Description
+report.all_valid.filter=(status:pending or status:waiting)
+
+report.in.columns=id,description
+report.in.description=Inbox
+report.in.filter=status:pending limit:page (gtdList:in)
+report.in.labels=ID,Description
+
+report.someday.columns=id,description.count
+report.someday.description=Someday/Maybe
+report.someday.filter=limit: gtdList:someday status:pending
+report.someday.labels=ID,Description
+
+report.standby.columns=id,priority,project,due.relative,description.count,urgency
+report.standby.description=WaitingFor
+report.standby.labels=ID,P,Project,Due,Description,Urgency
+report.standby.filter=limit: gtdList:standby status:pending +READY
+report.standby.sort=urgency-
+
+report.objectives.columns=id,priority,project,description.count,urgency
+report.objectives.description=Projects
+report.objectives.labels=ID,P,Project,Description,Urgency
+report.objectives.filter=limit: gtdList:objective status:pending +UNBLOCKED
+report.objectives.sort=urgency-
+
+report.type.columns=id,description,gtdList
+report.type.description=Type
+report.type.filter=status:pending limit:page
+report.type.labels=ID,Description,Type
+
+report.cal.columns=id,entry.age,recur.indicator,scheduled,due,description
+report.cal.description=Calendar
+report.cal.filter=gtdList:cal status:pending limit:page
+report.cal.labels=ID,Age,R,Scheduled,Due,Description
+report.cal.sort=scheduled

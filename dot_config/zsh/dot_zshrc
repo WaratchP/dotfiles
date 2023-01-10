@@ -1,0 +1,107 @@
+# Start tmux if exists
+#    if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ] && [[ ! $(tmux list-sessions) ]]; then
+#        exec tmux
+#    fi
+
+# Source Direnv
+    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+
+# Enable Powerlevel10k instant prompt. 
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+
+# Hook Direnv
+    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+
+# Local env
+    local DISTRIBUTION=$(cat /etc/os-release | grep "^ID=" | cut -d'=' -f2)
+    local ZSH_CACHE=$HOME/.cache/zsh
+    local CONFIG=$HOME/.config/zsh/config/
+    local COMPLETIONS=$HOME/.local/bin/zsh_completions/
+
+# Set shell variables
+    export EDITOR=nvim
+    export LANG="en_US.UTF-8"
+
+# Misc
+    setopt ZLE
+    declare -U path
+    LESSHISTFILE="/dev/null"
+    umask 002
+
+    setopt AUTO_CD
+    setopt COMBINING_CHARS
+    setopt NO_BEEP
+    bindkey -v
+    export KEYTIMEOUT=1
+
+    fpath+=$COMPLETIONS
+    autoload -Uz compinit
+    compinit
+
+
+# ZSH History
+    alias history='fc -fl 1'
+    HISTFILE=$ZSH_CACHE/history                 # Keep our home directory neat by keeping the histfile somewhere else
+    SAVEHIST=10000                              # Big history
+    HISTSIZE=10000                              # Big history
+    setopt EXTENDED_HISTORY                     # Include more information about when the command was executed, etc
+    setopt APPEND_HISTORY                       # Allow multiple terminal sessions to all append to one zsh command history
+    setopt HIST_EXPIRE_DUPS_FIRST               # When duplicates are entered, get rid of the duplicates first when we hit $HISTSIZE 
+    setopt HIST_IGNORE_DUPS                     # Do not write events to history that are duplicates of the immediately previous event
+    setopt HIST_IGNORE_ALL_DUPS                 # If a new command line being added to the history list duplicates an older one, the older command is removed from the list
+    setopt HIST_IGNORE_SPACE                    # Don't enter commands into history if they start with a space
+    setopt HIST_FIND_NO_DUPS                    # When searching history don't display results already cycled through twice
+    setopt HIST_SAVE_NO_DUPS                    # When writing out the history file, older commands that duplicate newer ones are omitted.
+    setopt HIST_VERIFY                          # makes history substitution commands a bit nicer. I don't fully understand
+    setopt SHARE_HISTORY                        # Shares history across multiple zsh sessions, in real time
+    setopt INC_APPEND_HISTORY                   # Add commands to history as they are typed, don't wait until shell exit
+    setopt HIST_REDUCE_BLANKS                   # Remove extra blanks from each command line being added to history
+
+# ZSH dirstack
+    setopt AUTO_PUSHD           # Push the current directory visited on the stack.
+    setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+    setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+    alias d='dirs -v'
+    for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# Source plugins
+  if [[ $DISTRIBUTION == "ubuntu" ]]; then
+    source /usr/share/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    source /usr/share/powerlevel10k/powerlevel10k.zsh-theme
+  elif [[ $DISTRIBUTION == "arch" ]]; then
+    source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+  fi
+
+# Source all user config
+    FILES_STR=$(fd --glob '*' --exclude 'init.sh' $CONFIG)
+    FILES=($(echo $FILES_STR | tr '\n' ' '))
+    
+    for FILE in $FILES; do
+    	source $FILE
+    done
+
+# Add no. of taskwarrior inbox items to shell prompt
+#    export PS1='$(task gtdList:in +PENDING count) '$PS1
+
+# Source bash completion for Azure CLI
+    autoload -U +X bashcompinit && bashcompinit
+    source /etc/bash_completion.d/azure-cli
+
+# Source fnm
+    eval "$(fnm env --use-on-cd)"
+
+# Source Powerlevel10k
+    [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# Use bash on tty
+#    if [ `tput colors` != "256" ]; then
+#      exec bash -l;
+#    fi
+
