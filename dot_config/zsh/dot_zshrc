@@ -12,7 +12,7 @@
     fi
 
 # Hook Direnv
-    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
+#    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv hook zsh)"
 
 # Local env
     local DISTRIBUTION=$(cat /etc/os-release | grep "^ID=" | cut -d'=' -f2)
@@ -93,8 +93,8 @@
 #    export PS1='$(task gtdList:in +PENDING count) '$PS1
 
 # Source bash completion for Azure CLI
-    autoload -U +X bashcompinit && bashcompinit
-    source /etc/bash_completion.d/azure-cli
+#    autoload -U +X bashcompinit && bashcompinit
+#    source /etc/bash_completion.d/azure-cli
 
 # Source fnm
     eval "$(fnm env --use-on-cd)"
