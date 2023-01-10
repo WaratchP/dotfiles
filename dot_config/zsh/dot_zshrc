@@ -19,6 +19,7 @@
     local ZSH_CACHE=$HOME/.cache/zsh
     local CONFIG=$HOME/.config/zsh/config/
     local COMPLETIONS=$HOME/.local/bin/zsh_completions/
+    local SRC=$HOME/.local/src
 
 # Set shell variables
     export EDITOR=nvim
@@ -68,10 +69,11 @@
 
 # Source plugins
   if [[ $DISTRIBUTION == "ubuntu" ]]; then
-    source /usr/share/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source $SRC/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+    source $SRC/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    source $SRC/powerlevel10k/powerlevel10k.zsh-theme
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-    source /usr/share/powerlevel10k/powerlevel10k.zsh-theme
+
   elif [[ $DISTRIBUTION == "arch" ]]; then
     source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
