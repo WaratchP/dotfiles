@@ -3,6 +3,17 @@
     {
       "class": "pop-shell-example",
       "title": "pop-shell-example"
+    },
+    {
+      "class": "Gnome-font-viewer"
+    },
+    {
+      "class": "Steam",
+      "title": "Steam Sign In"
+    },
+    {
+      "class": "Intune-portal",
+      "title": "Microsoft"
     }
   ],
   "skiptaskbarhidden": [],

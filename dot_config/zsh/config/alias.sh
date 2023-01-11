@@ -1,36 +1,42 @@
-# system
+# SYSTEM
 alias shutdown='sudo shutdown now'
 alias restart='sudo reboot'
 
-# quality of life
-alias sudo="sudo "
-alias plmx="pulsemixer"
+# --------------------------------------------------------------------------------------------------
+# SYSTEMD
+## global services
+alias sdstat='systemctl status '
+alias sdenable='sudo systemctl enable '
+alias sddisable='sudo systemctl disable '
+alias sdstart='sudo systemctl start '
 
-# ls
-alias ls='ls --color=auto'
-alias lsl='ls -l'
-alias ll='ls -lahF'
-alias lls='ls -lahFtr'
-alias la='ls -A'
-alias l='ls -CF'
+## user services
+alias sdustat='systemctl --user status '
+alias sduenable='systemctl --user enable '
+alias sdudisable='systemctl --user disable '
+alias sdustart='systemctl --user start '
 
-# cp
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias rm='rm -i'
 
-# grep
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+# --------------------------------------------------------------------------------------------------
+# PACKAGE MANAGERS
+## apt
+alias aptss='apt search'
+alias aptlist='apt list --installed'
+alias aptshow='apt show '
 
-# pacman
+alias aptsy='sudo apt update'
+alias aptsyu='sudo apt upgrade'
+alias aptr='sudo apt remove'
+alias aptrs='sudo apt purge'
+alias aptclean='sudo apt autoremove --purge'
+
+## pacman
 alias paci='sudo pacman -S'               # install
 alias pachi='sudo pacman -Ql'             # Pacman Has Installed - what files where installed in a package
 alias pacs='sudo pacman -Ss'              # search
 alias pacu='sudo pacman -Syu'             # update
 alias pacr='sudo pacman -R'               # remove package but not dependencies
-alias pacrr='sudo pacman -Rs'             # remove package with unused dependencies by other softwares
+alias pacrs='sudo pacman -Rs'             # remove package with unused dependencies by other softwares
 alias pacrc='sudo pacman -Sc'             # remove pacman's cache
 alias pacro='pacman -Rns $(pacman -Qtdq)'
 alias pacrl='rm /var/lib/pacman/db.lck'   # pacman remove locks
@@ -40,7 +46,7 @@ alias paccc='sudo pacman -Scc'            # empty the whole cache
 alias pacaur="pacman -Qem | expac --timefmt=\"%F %T\" \"[%l] $(printf '\033[1;34m')%n$(printf '\033[0m') (%v)\" - | sort -k1"
 alias pacbse="pacman -Qen | expac --timefmt=\"%F %T\" \"[%l] $(printf '\033[1;34m')%n$(printf '\033[0m') (%v)\" - | sort -k1"
 
-# yay
+## yay
 alias yayi='yay -S'     # install
 alias yayhi='yay -Ql'   # Yay Has Installed - what files where installed in a package
 alias yays='yay -Ss'    # search
@@ -50,7 +56,9 @@ alias yayrr='yay -Rs'   # remove package with unused dependencies by other softw
 alias yayrc='yay -Sc'   # remove yay's cache
 alias yayls="yay -Qe"
 
-# nvim
+# --------------------------------------------------------------------------------------------------
+# TERMINAL
+## nvim
 alias svim='sudoedit'
 alias dvim="vim -u /usr/share/nvim/archlinux.vim" # nvim with default config
 alias nvimc='rm -I $VIMCONFIG/swap/*'             # clean nvim swap file
@@ -59,7 +67,7 @@ alias nviml='nvim -w $VIMCONFIG/vimlog "$@"'      # log the keystrokes
 alias nvimd='nvim --noplugin -u NONE'             # launch nvim without any plugin or config (nvim debug)
 alias nvimfr='nvim +e /tmp/scratchpad.md +"set spelllang=fr"'
 
-# git
+## git
 alias gs='git status'
 alias gss='git status -s'
 alias ga='git add'
@@ -83,15 +91,14 @@ alias gclean="git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n
 alias gblog="git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(refname:short)%(color:reset) - %(color:yellow)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:blue)%(committerdate:relative)%(color:reset))'"                                                             # git log for each branches
 alias gsub="git submodule update --remote"                                                        # pull submodules
 alias gj="git-jump"                                                                               # Open in vim quickfix list files of interest (git diff, merged...)
-
 alias dif="git diff --no-index"                                                                   # Diff two files even if not in git repo! Can add -w (don't diff whitespaces)
 
-# tmux
+## tmux
 alias tmuxk='tmux kill-session -t'
 alias tmuxa='tmux attach -t'
 alias tmuxl='tmux list-sessions'
 
-# docker
+## docker
 alias dockls="docker container ls | awk 'NR > 1 {print \$NF}'"                  # display names of running containers
 alias dockRr='docker rm $(docker ps -a -q)'                                     # delete every containers / images
 alias dockRr='docker rm $(docker ps -a -q) && docker rmi $(docker images -q)'   # delete every containers / images
@@ -101,19 +108,46 @@ alias dockprune='docker system prune -a'                                        
 alias dockceu='docker-compose run --rm -u $(id -u):$(id -g)'                    # run as the host user
 alias dockce='docker-compose run --rm'
 
-# mdBook
+## mdBook
 alias mdbuild="mdbook build --open"
 alias mdwatch="mdbook watch --open"
 alias mdserve="mdbook serve --open --hostname 127.0.0.1 --port 10000"
 alias mdclean="mdbook clean"
 
-# gpu
+# --------------------------------------------------------------------------------------------------
+# QOL
+## ls
+alias ls='ls --color=auto'
+alias lsl='ls -l'
+alias ll='ls -lahF'
+alias lls='ls -lahFtr'
+alias la='ls -A'
+alias l='ls -CF'
+alias ols="ls -la --color | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(\" %0o \",k);print}'"
+
+## cp
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -i'
+
+## grep
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+## misc
+alias sudo="sudo "
+alias plmx="pulsemixer"
+
+## gpu
 alias oglr="glxinfo | grep -iE 'vendor:|device:|version:'"
 
-# de/wm
+## de/wm
 alias swaystart='~/.config/bin/sway'
 
-# taskwarrior
+# --------------------------------------------------------------------------------------------------
+# GTD
+## taskwarrior
 alias in='task add gtdList:in'
 
 tickle () {
@@ -125,5 +159,3 @@ tickle () {
 alias tick='tickle'
 alias think='tickle +1d'
 
-# ncmpcpp
-alias music='tmux new-session -s $$ "tmux source-file ~/.config/ncmpcpp/tsession"'
