@@ -14,12 +14,13 @@ set searchurls.qw https://www.qwant.com/?q=
 
 set searchurls.pip https://pypi.org/search/?q=
 set searchurls.npm https://www.npmjs.com/search?q=
-set searchurls.crt https://crates.io/search?q=
+set searchurls.crates https://crates.io/search?q=
 
 set searchurls.gh https://github.com/search?utf8=✓&q=
 set searchurls.ubj https://packages.ubuntu.com/search?searchon=names&suite=jammy&section=all&keywords=
 set searchurls.pac https://archlinux.org/packages/?sort=&q=
 set searchurls.aur https://aur.archlinux.org/packages?O=0&K=
+set searchurls.nix https://search.nixos.org/packages?channel=22.11&query=
 
 set searchurls.aw https://wiki.archlinux.org/index.php?search=
 set searchurls.gw https://wiki.gentoo.org/index.php?title=Special%3ASearch&profile=default&fulltext=Search&search=
@@ -29,6 +30,7 @@ set searchurls.mdn https://developer.mozilla.org/en-US/search?q=
 
 set searchurls.yt https://www.youtube.com/results?search_query=
 set searchurls.protondb https://www.protondb.com/search?q=
+set searchurls.flathub https://flathub.org/apps/search/
 
 set searchurls.osm https://www.openstreetmap.org/search?query=
 

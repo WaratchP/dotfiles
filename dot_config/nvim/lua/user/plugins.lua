@@ -44,9 +44,17 @@ return packer.startup(function(use)
   -- Packer
   use { "wbthomason/packer.nvim" }
 
-  -- Plenary & Telescope
+  -- Telescope
+  use { "nvim-lua/popup.nvim" }
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-telescope/telescope.nvim" }
+  use { "nvim-telescope/telescope-media-files.nvim" }
+
+  -- Fuzzy finders
+  use { "ThePrimeagen/harpoon" }
+  
+  -- Cheat sheet
+  use { "sudormrfbin/cheatsheet.nvim" }
 
   -- CMP plugins
   use { "hrsh7th/nvim-cmp"} -- The completion plugin
@@ -82,12 +90,18 @@ return packer.startup(function(use)
     end,
   }
 
+  -- Undotree
+  use { "mbbill/undotree" }
+
+  -- Git
+  use { "tpope/vim-fugitive" }
+
   use { "JoosepAlviste/nvim-ts-context-commentstring"}
 
   -- Init page
   use { "goolord/alpha-nvim" }
---
---  -- IDE-fying
+
+  -- IDE-fying
   use { "kyazdani42/nvim-tree.lua" }
   use { "kyazdani42/nvim-web-devicons" }
   use { "akinsho/bufferline.nvim" }
@@ -100,6 +114,10 @@ return packer.startup(function(use)
 
   -- Note-taking
   use { "vimwiki/vimwiki" }
+
+  -- Zettelkasten
+  use { "renerocksai/telekasten.nvim" }
+  use { "renerocksai/calendar-vim"}
 
   -- Quality of life
   use { "windwp/nvim-autopairs" }

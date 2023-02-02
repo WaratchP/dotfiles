@@ -6,6 +6,7 @@ end
 -- Treesitter setup
 configs.setup({
 	ensure_installed = {
+    "help",
 		"bash", 
 		"dockerfile", 
 		"yaml", 

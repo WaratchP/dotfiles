@@ -4,7 +4,7 @@
 #    fi
 
 # Source Direnv
-    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
+#    (( ${+commands[direnv]} )) && emulate zsh -c "$(direnv export zsh)"
 
 # Enable Powerlevel10k instant prompt. 
     if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -18,7 +18,6 @@
     local DISTRIBUTION=$(cat /etc/os-release | grep "^ID=" | cut -d'=' -f2)
     local ZSH_CACHE=$HOME/.cache/zsh
     local CONFIG=$HOME/.config/zsh/config/
-    local COMPLETIONS=$HOME/.local/bin/zsh_completions/
     local SRC=$HOME/.local/src
 
 # Set shell variables
@@ -37,10 +36,12 @@
     bindkey -v
     export KEYTIMEOUT=1
 
-    fpath+=$COMPLETIONS
+    fpath+="/usr/share/zsh/site-functions/"
     autoload -Uz compinit
-    compinit
-
+    for dump in ~/.zcompdump(N.mh+24); do
+      compinit
+    done
+    compinit -C
 
 # ZSH History
     alias history='fc -fl 1'
@@ -91,10 +92,6 @@
 
 # Add no. of taskwarrior inbox items to shell prompt
 #    export PS1='$(task gtdList:in +PENDING count) '$PS1
-
-# Source bash completion for Azure CLI
-#    autoload -U +X bashcompinit && bashcompinit
-#    source /etc/bash_completion.d/azure-cli
 
 # Source fnm
     eval "$(fnm env --use-on-cd)"

@@ -24,6 +24,7 @@ alias aptss='apt search'
 alias aptlist='apt list --installed'
 alias aptshow='apt show '
 
+alias apts='sudo apt install'
 alias aptsy='sudo apt update'
 alias aptsyu='sudo apt upgrade'
 alias aptr='sudo apt remove'
@@ -93,6 +94,16 @@ alias gsub="git submodule update --remote"                                      
 alias gj="git-jump"                                                                               # Open in vim quickfix list files of interest (git diff, merged...)
 alias dif="git diff --no-index"                                                                   # Diff two files even if not in git repo! Can add -w (don't diff whitespaces)
 
+alias gcl='git clone '
+
+gcls() {
+  URL="$1"
+  REPO_BASE="$HOME/.local/src/${${URL}##*/}"
+  REPO=${REPO_BASE%.*}
+  git clone $URL $REPO
+  cd $REPO
+}
+
 ## tmux
 alias tmuxk='tmux kill-session -t'
 alias tmuxa='tmux attach -t'
@@ -144,6 +155,12 @@ alias oglr="glxinfo | grep -iE 'vendor:|device:|version:'"
 
 ## de/wm
 alias swaystart='~/.config/bin/sway'
+
+## timing
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 4); do /usr/bin/time $shell -i -c exit; done
+}
 
 # --------------------------------------------------------------------------------------------------
 # GTD

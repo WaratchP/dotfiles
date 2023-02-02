@@ -13,7 +13,6 @@ local servers = {
   "jsonls",
   "yamlls",
   "lemminx",
-  "bicep",
   "rust_analyzer"
 }
 
@@ -46,10 +45,10 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", pyright_opts, opts)
   end
 
-  if server == "bicep" then
-    local bicep_opts = require "user.lsp.settings.bicep"
-    opts = vim.tbl_deep_extend("force", bicep_opts, opts)
-  end
+--   if server == "bicep" then
+--     local bicep_opts = require "user.lsp.settings.bicep"
+--     opts = vim.tbl_deep_extend("force", bicep_opts, opts)
+--   end
 
   lspconfig[server].setup(opts)
 end

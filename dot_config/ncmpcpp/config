@@ -23,7 +23,7 @@ display_bitrate = "no"
 
 #### Header
 user_interface= alternative
-alternative_header_first_line_format = $6$b» {%f} «$/b
+alternative_header_first_line_format = $6$b» {%t} «$/b
 alternative_header_second_line_format = $4{%b}|{/%D/}
 alternative_ui_separator_color = white
 
@@ -31,7 +31,7 @@ alternative_ui_separator_color = white
 statusbar_color = "white"
 
 #### Song format
-song_list_format = "                                 $4%t $R$5%a "
+song_list_format = "                           $4%t $R$5%a "
 song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
 song_window_title_format = " {%a} - {%t}"
 

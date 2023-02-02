@@ -56,11 +56,11 @@ keymap("v", ">", ">gv", opts)
 
 keymap("n", "<leader>ti", ":pu=strftime('%Y-%m-%d')<CR>", opts)
 
--- Settings --
+-- Config --
 
-keymap("n", "<leader>si", ":edit ~/.config/nvim/init.lua<CR>", opts)
-keymap("n", "<leader>sp", ":edit ~/.config/nvim/lua/user/plugins.lua<CR>", opts)
-keymap("n", "<leader>sk", ":edit ~/.config/nvim/lua/user/keymaps.lua<CR>", opts)
+keymap("n", "<leader>ci", ":edit ~/.config/nvim/init.lua<CR>", opts)
+keymap("n", "<leader>cp", ":edit ~/.config/nvim/lua/user/plugins.lua<CR>", opts)
+keymap("n", "<leader>ck", ":edit ~/.config/nvim/lua/user/keymaps.lua<CR>", opts)
 
 -- Plugins --
 
@@ -69,14 +69,18 @@ keymap("n", "<leader>pu", ":PackerUpdate<CR>", opts)
 keymap("n", "<leader>pc", ":PackerClean<CR>", opts)
 
 -- Alpha
-keymap("n", "<leader>ao", ":Alpha<CR>", opts)
+keymap("n", "<leader>sp", ":Alpha<CR>", opts)
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>f", ":NvimTreeFocus<CR>", opts)
 
+-- Undotree
+keymap("n", "<leader>uf", ":UndotreeShow<CR>:UndotreeFocus<CR>", opts)
+keymap("n", "<leader>ue", ":UndotreeToggle<CR>", opts)
+
 -- Telescope
-keymap("n", "<leader>tf", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>tf", ":Telescope find_files hidden=true<CR>", opts)
 keymap("n", "<leader>tr", ":Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>tt", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>tp", ":Telescope projects<CR>", opts)
@@ -100,11 +104,39 @@ keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
--- Instant-Markdown
-keymap("n", "<leader>mu", ":InstantMarkdownPreview<CR>", opts)
-keymap("n", "<leader>md", ":InstantMarkdownStop<CR>", opts)
+-- Harpoon
+keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<CR>")
+keymap("n", "<leader>hm", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>")
+keymap("n", "<C-1>", "<cmd>lua require('harpoon.ui').nav_file(1)<CR>")
+keymap("n", "<C-2>", "<cmd>lua require('harpoon.ui').nav_file(2)<CR>")
+keymap("n", "<C-3>", "<cmd>lua require('harpoon.ui').nav_file(3)<CR>")
+keymap("n", "<C-4>", "<cmd>lua require('harpoon.ui').nav_file(4)<CR>")
 
 -- Vimwiki
 keymap("n", "<leader>ws", ":VimwikiSearchTags ", opts)
 keymap("n", "<leader>wl", ":lopen<CR> ", opts)
 
+-- Cheatsheet
+keymap("n", "<leader>c?", ":Cheatsheet<cr>", opts)
+keymap("n", "<leader>ce", ":CheatsheetEdit<cr>", opts)
+
+
+-- Telekasten
+keymap("n", "<leader>zn", "<cmd>:lua require('telekasten').new_note()<cr>", opts)
+keymap("n", "<leader>zf", "<cmd>:lua require('telekasten').find_notes()<cr>", opts)
+keymap("n", "<leader>zd", "<cmd>:lua require('telekasten').find_daily_notes()<cr>", opts)
+keymap("n", "<leader>zW", "<cmd>:lua require('telekasten').find_weekly_notes()<cr>", opts)
+keymap("n", "<leader>zg", "<cmd>:lua require('telekasten').search_notes()<cr>", opts)
+keymap("n", "<leader>zz", "<cmd>:lua require('telekasten').follow_link()<cr>", opts)
+keymap("n", "<leader>zT", "<cmd>:lua require('telekasten').goto_today()<cr>", opts)
+keymap("n", "<leader>zW", "<cmd>:lua require('telekasten').goto_thisweek()<cr>", opts)
+keymap("n", "<leader>zc", "<cmd>:lua require('telekasten').show_calendar()<cr>", opts)
+keymap("n", "<leader>zi", "<cmd>:lua require('telekasten').paste_img_and_link()<cr>", opts)
+keymap("n", "<leader>zt", "<cmd>:lua require('telekasten').toggle_todo()<cr>", opts)
+keymap("n", "<leader>zt", "<cmd>:lua require('telekasten').toggle_todo({ v = true})<cr>", opts)
+keymap("n", "<leader>zb", "<cmd>:lua require('telekasten').show_backlinks()<cr>", opts)
+keymap("n", "<leader>zF", "<cmd>:lua require('telekasten').find_friends()<cr>", opts)
+keymap("n", "<leader>zI", "<cmd>:lua require('telekasten').insert_img_link({ i=true })<cr>", opts)
+keymap("n", "<leader>zp", "<cmd>:lua require('telekasten').preview_img()<cr>", opts)
+keymap("n", "<leader>zm", "<cmd>:lua require('telekasten').browse_media()<cr>", opts)
+keymap("n", "<leader>z", "<cmd>:lua require('telekasten').panel()<cr>", opts)

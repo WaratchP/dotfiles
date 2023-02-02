@@ -14,6 +14,14 @@
     {
       "class": "Intune-portal",
       "title": "Microsoft"
+    },
+    {
+      "class": "mozc_tool",
+      "title": "Mozc Settings"
+    },
+    {
+      "class": "draw.io",
+      "title": "draw.io Update"
     }
   ],
   "skiptaskbarhidden": [],
